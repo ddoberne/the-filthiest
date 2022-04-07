@@ -8,7 +8,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-from google.cloud import storage
+import requests
 
 
 # In[32]:
@@ -21,9 +21,8 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
-
-storage_client = storage.Client()
-bucket = storage_client.bucket('the-filthiest')
+url = 'https://storage.googleapis.com/the-filthiest/pitch-data/2022-4-7.csv'
+contents = requests.get(url).content
 
 
 # In[ ]:
@@ -31,8 +30,6 @@ bucket = storage_client.bucket('the-filthiest')
 
 date = date.today() # + timedelta(days = -1)
 filename = date + '.csv'
-blob = bucket.blob('pitch-data/' + filename)
-contents = blob.download_as_string()
 df = pd.read_csv(contents, index_col = 0)
 
 
