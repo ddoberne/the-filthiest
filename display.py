@@ -28,7 +28,7 @@ contents = requests.get(url).content
 
 
 date = date.today() # + timedelta(days = -1)
-date_str = '-'.join([str(date.year), str(date.month), str(date.day)
+date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
 filename = date_str + '.csv'
 df = pd.read_csv(contents, index_col = 0)
 
