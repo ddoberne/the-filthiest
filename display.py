@@ -20,8 +20,6 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
-url = 'https://storage.googleapis.com/the-filthiest/pitch-data/2022-4-7.csv'
-contents = requests.get(url).content
 
 
 # In[ ]:
@@ -30,7 +28,10 @@ contents = requests.get(url).content
 date = date.today() # + timedelta(days = -1)
 date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
 filename = date_str + '.csv'
-df = pd.read_csv(contents, index_col = 0)
+
+url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
+contents = requests.get(url).content
+df = pd.read_csv(url, index_col = 0)
 
 
 # In[19]:
