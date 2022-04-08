@@ -38,6 +38,7 @@ except:
   
 contents = requests.get(url).content
 df = pd.read_csv(url, index_col = 0)
+st.write(url)
 
 # In[19]:
 
