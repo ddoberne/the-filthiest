@@ -13,7 +13,8 @@ import requests
 
 # In[32]:
 
-from datetime import date, timedelta, now
+import datetime
+from datetime import date, timedelta
 
 st.write('# The Filthiest ⚾')
 
@@ -24,14 +25,14 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
-date = now() + timedelta(hours = -8)
+date = datetime.now() + timedelta(hours = -8)
 try:
   
   date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
 except:
-  date = now() + timedelta(days = -1) + timedelta(hours = -8)
+  date = datetime.now() + timedelta(days = -1) + timedelta(hours = -8)
   date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
