@@ -24,7 +24,7 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
-date = date.today() #+ timedelta(days = -1)
+date = date.today() + timedelta(days = -1)
 try:
   
   date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
@@ -38,8 +38,6 @@ except:
   
 contents = requests.get(url).content
 df = pd.read_csv(url, index_col = 0)
-st.write(len(df))
-st.write(url)
 
 # In[19]:
 
