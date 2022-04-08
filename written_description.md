@@ -1,0 +1,6 @@
+# The Filthiest ⚾
+## Design
+The goal of this project was to create an automated feed of the best pitches thrown in MLB games from the previous day. A pipeline is constructed that uses a recurring scraping script to pull the data, deploys a model to grade each pitch, uploads the data to a cloud-based database, then queries the database to visualize the results in a user-facing app. Thanks to MLB's recent advances in video cataloguing, individual results can be easily viewed as video with the right query provided by the app.
+## The Model
+Scikit-learn's RandomForestClassifier was trained with the 600,000+ pitches from the 2021 major league season, scraped from BaseballSavant. These pitches were divided into the categories Fastball, Slider, Sinker, Curveball, Changeup, Cutter, and Splitter. Each has data for velocity, rpm, vertical break, horizontal break, and outcome. The outcome was used as the target variable with the rest as features. Outcomes were divided in Strikes, Balls, Contact (In Play), and Contact (Foul). The model was trained to soft predict whether the outcome was a Strike vs. Contact. The model's prediction of a pitch's outcome would be a Strike given that it was a Strike or Contact would then be used as FiFaX (**Fi**lth **Fa**ctor e**X**pected).
+## Data
