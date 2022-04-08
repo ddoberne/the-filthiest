@@ -25,11 +25,17 @@ st.write('# The Filthiest ⚾')
 # In[ ]:
 
 
-date = date.today() # + timedelta(days = -1)
-date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
-filename = date_str + '.csv'
-
-url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
+try:
+  date = date.today() + timedelta(hours = -8)
+  date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
+  filename = date_str + '.csv'
+  url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
+except:
+  date = date.today() + timedelta(days = -1) + timedelta(hours = -8)
+  date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
+  filename = date_str + '.csv'
+  url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
+  
 contents = requests.get(url).content
 df = pd.read_csv(url, index_col = 0)
 
