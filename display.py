@@ -24,14 +24,14 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
-date = date.today() + timedelta(days = -1)
+date = date.today() #+ timedelta(days = -1)
 try:
   
   date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
 except:
-  date = date.today() + timedelta(days = -2)
+  date = date.today() + timedelta(days = -1)
   date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
