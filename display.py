@@ -24,7 +24,7 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
-date = date.today() + timedelta(days = -1)
+date = date.today() #+ timedelta(days = -1)
 try:
   
   date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
