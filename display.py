@@ -36,9 +36,9 @@ except:
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
   
+st.write(url)
 contents = requests.get(url).content
 df = pd.read_csv(url, index_col = 0)
-st.write(url)
 
 # In[19]:
 
