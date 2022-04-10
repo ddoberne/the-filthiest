@@ -121,6 +121,8 @@ if len(leaderboard) > 0:
         text_y = ax.get_ylim()[1]
         ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[sort], 0), xytext = (leader[sort], text_y/2),
                     arrowprops = dict(color = 'red'), horizontalalignment = 'center')
+        if pitch_type == '(none)':
+          pitch_type_in = 'all pitche'
         ax.set(title = f'Distribution of {sort_in} for {pitch_type_in}s on {date}')
         st.pyplot(fig)
         
