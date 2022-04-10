@@ -43,7 +43,7 @@ df = pd.read_csv(url, index_col = 0)
 # In[19]:
 
 
-pitch_type_in = st.sidebar.selectbox('Pitch type:', ('4-Seam Fastball', 'Slider', '2-Seam Fastball/Sinker', 'Changeup', 'Curveball', 'Splitter/Knuckleball', 'Cutter'))
+pitch_type_in = st.sidebar.selectbox('Pitch type:', ('(none)', '4-Seam Fastball', 'Slider', '2-Seam Fastball/Sinker', 'Changeup', 'Curveball', 'Splitter/Knuckleball', 'Cutter'))
 
 sort_in = st.sidebar.selectbox('Sort by:', ('FiFaX', 'MPH', 'RPM', 'VBreak', 'HBreak'))
 
@@ -59,7 +59,8 @@ st.sidebar.write('Created by Dayv Doberne | [Twitter](https://www.twitter.com/Su
 st.sidebar.write('Inspired by [Pitching Ninja](https://twitter.com/PitchingNinja)')
 
 
-pitch_dict = {'4-Seam Fastball': 'Fastball',
+pitch_dict = {'(none)': True,
+              '4-Seam Fastball': 'Fastball',
               'Slider': 'Slider',
               '2-Seam Fastball/Sinker': 'Sinker',
               'Changeup': 'Changeup',
@@ -90,8 +91,10 @@ else:
     df = df.loc[df['result'] == 'Strike']
 
 is_ascending = False
-
-leaderboard = df.loc[(df.pitch_type == pitch_type)].sort_values(by = sort, ascending = is_ascending)
+if pitch_type:
+  pass
+else:
+  leaderboard = df.loc[(df.pitch_type == pitch_type)].sort_values(by = sort, ascending = is_ascending)
 if pitcher_search != '':
     leaderboard = leaderboard.loc[leaderboard['pitcher'].apply(lambda pitcher_name: pitcher_search.lower() in pitcher_name.lower())]
 if len(leaderboard) > 0:
@@ -101,11 +104,14 @@ if len(leaderboard) > 0:
     leaderboard_show = leaderboard[['pitcher', 'batter', 'mph', 'rpm', 'vbreak', 'hbreak', 'fifax']]
     leaderboard_show.columns = ['Pitcher', 'Batter', 'Velo (mph)', 'RPM', 'VBreak', 'HBreak', 'FiFaX']
     leaderboard_show.index = range(1, len(leaderboard_show) + 1)
-    st.write(f'The top {str(show_n)} {pitch_type_in}s from MLB games on {date}, sorted by {sort_in}.')
+    if pitch_type:
+      st.write(f'The top {str(show_n)} pitches from MLB games on {date}, sorted by {sort_in}.')
+    else:
+      st.write(f'The top {str(show_n)} {pitch_type_in}s from MLB games on {date}, sorted by {sort_in}.')
     st.dataframe(leaderboard_show.head(show_n).style.format({'Velo (mph)':"{:.4}", 'FiFaX':"{:.3}"}))
     
     if leader_index <= show_n:
-        st.write(f"{leader.pitcher}'s {pitch_type.lower()} to {leader.batter} in inning {str(leader.inning)}, {leader['count'][1]}-{leader['count'][4]} count.")
+        st.write(f"{leader.pitcher}'s {leader['pitch_type_raw'].lower()} to {leader.batter} in inning {str(leader.inning)}, {leader['count'][1]}-{leader['count'][4]} count.")
         st.components.v1.iframe(f"https://www.mlb.com/video/search?q={leader.pitcher.replace(' ', '+')}+            {leader.batter.replace(' ', '+')}+inning+{str(leader.inning)}+{str(leader['count'][1])}+ball+            {str(leader['count'][4])}+strike&qt=FREETEXT", height = 600)
         
         fig = plt.figure(figsize = (12,4))
