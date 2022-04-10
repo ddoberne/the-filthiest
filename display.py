@@ -92,7 +92,7 @@ else:
 
 is_ascending = False
 if pitch_type:
-  pass
+  leaderboard = df.sort_values(by = sort, ascending = is_ascending)
 else:
   leaderboard = df.loc[(df.pitch_type == pitch_type)].sort_values(by = sort, ascending = is_ascending)
 if pitcher_search != '':
