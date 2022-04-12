@@ -31,12 +31,14 @@ try:
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
   contents = requests.get(url).content
+  print('URL get try 1')
 except:
   date = date.today() + timedelta(days = -2)
   date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
   contents = requests.get(url).content
+  print('URL get try 2')
   
 df = pd.read_csv(url, index_col = 0)
 
