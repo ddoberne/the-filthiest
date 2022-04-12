@@ -31,6 +31,7 @@ try:
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
   contents = requests.get(url).content
+  df = pd.read_csv(url, index_col = 0)
   print('URL get try 1')
 except:
   date = date.today() + timedelta(days = -2)
@@ -38,9 +39,9 @@ except:
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
   contents = requests.get(url).content
+  df = pd.read_csv(url, index_col = 0)
   print('URL get try 2')
   
-df = pd.read_csv(url, index_col = 0)
 
 # In[19]:
 
