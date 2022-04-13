@@ -87,7 +87,7 @@ sort = sort_dict[sort_in]
 
 
 # In[25]:
-def kdeplot(graph_sort, graph_sort_in)
+def kdeplot(graph_sort, graph_sort_in):
   fig = plt.figure(figsize = (12,4))
   sns.set_theme('notebook')
   ax = sns.kdeplot(x = leaderboard[graph_metric])
