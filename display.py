@@ -74,7 +74,7 @@ pitch_dict = {'(none)': '(none)',
               'Splitter/Knuckleball': 'Splitter',
               'Cutter': 'Cutter'}
 sort_dict = {}
-for key, value in zip(sort_in_list, sort_in):
+for key, value in zip(sort_in_list, sort_list):
   sort_dict[key] = value
 
 
@@ -107,7 +107,6 @@ else:
     df = df.loc[df['result'] == 'Strike']
 
 is_ascending = False
-st.write(sort_dict)
 if pitch_type == '(none)':
   leaderboard = df.sort_values(by = sort, ascending = is_ascending)
 else:
