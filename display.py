@@ -134,11 +134,11 @@ if len(leaderboard) > 0:
         ax2 = sns.kdeplot(x = leaderboard[graph_metric])
         ax2.set_xlabel('MPH')
         text_y = ax.get_ylim()[1]
-        ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_metric], 0), xytext = (leader[graph_metric], text_y/2),
+        ax2.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_metric], 0), xytext = (leader[graph_metric], text_y/2),
                     arrowprops = dict(color = 'red'), horizontalalignment = 'center')
         if pitch_type == '(none)':
           pitch_type_in = 'all pitche'
-        ax.set(title = f'Distribution of MPH for {pitch_type_in}s on {date}')
+        ax2.set(title = f'Distribution of MPH for {pitch_type_in}s on {date}')
         st.pyplot(fig)
         
     else:
