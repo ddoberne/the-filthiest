@@ -110,6 +110,7 @@ is_ascending = False
 if pitch_type == '(none)':
   leaderboard = df.sort_values(by = sort, ascending = is_ascending)
 else:
+  st.write(sort)
   leaderboard = df.loc[(df.pitch_type == pitch_type)].sort_values(by = sort, ascending = is_ascending)
 if pitcher_search != '':
     leaderboard = leaderboard.loc[leaderboard['pitcher'].apply(lambda pitcher_name: pitcher_search.lower() in pitcher_name.lower())]
