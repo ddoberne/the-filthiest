@@ -119,14 +119,26 @@ if len(leaderboard) > 0:
         
         fig = plt.figure(figsize = (12,4))
         sns.set_theme('notebook')
-        ax = sns.kdeplot(x = leaderboard[sort])
-        ax.set_xlabel(sort_in)
+        graph_metric = 'fifax'
+        ax = sns.kdeplot(x = leaderboard[graph_metric])
+        ax.set_xlabel('FiFaX')
         text_y = ax.get_ylim()[1]
-        ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[sort], 0), xytext = (leader[sort], text_y/2),
+        ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_metric], 0), xytext = (leader[graph_metric], text_y/2),
                     arrowprops = dict(color = 'red'), horizontalalignment = 'center')
         if pitch_type == '(none)':
           pitch_type_in = 'all pitche'
-        ax.set(title = f'Distribution of {sort_in} for {pitch_type_in}s on {date}')
+        ax.set(title = f'Distribution of FiFaX for {pitch_type_in}s on {date}')
+        st.pyplot(fig)
+        
+        graph_metric = 'mph'
+        ax2 = sns.kdeplot(x = leaderboard[graph_metric])
+        ax2.set_xlabel('MPH')
+        text_y = ax.get_ylim()[1]
+        ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_metric], 0), xytext = (leader[graph_metric], text_y/2),
+                    arrowprops = dict(color = 'red'), horizontalalignment = 'center')
+        if pitch_type == '(none)':
+          pitch_type_in = 'all pitche'
+        ax.set(title = f'Distribution of MPH for {pitch_type_in}s on {date}')
         st.pyplot(fig)
         
     else:
