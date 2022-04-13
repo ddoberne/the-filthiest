@@ -48,7 +48,10 @@ except:
 
 pitch_type_in = st.sidebar.selectbox('Pitch type:', ('(none)', '4-Seam Fastball', 'Slider', '2-Seam Fastball/Sinker', 'Changeup', 'Curveball', 'Splitter/Knuckleball', 'Cutter'))
 
-sort_in = st.sidebar.selectbox('Sort by:', ('FiFaX', 'MPH', 'RPM', 'VBreak', 'HBreak'))
+sort_in_list = ('FiFaX', 'MPH', 'RPM', 'VBreak', 'HBreak')
+sort_list = ('fifax', 'mph', 'rpm', 'vbreak', 'hbreak')
+
+sort_in = st.sidebar.selectbox('Sort by:', sort_in_list)
 
 leader_index = st.sidebar.selectbox('Select index:', (1,2,3,4,5))
 pitcher_search = st.sidebar.text_input('Pitcher search:', value = '')
@@ -70,11 +73,9 @@ pitch_dict = {'(none)': '(none)',
               'Curveball': 'Curveball',
               'Splitter/Knuckleball': 'Splitter',
               'Cutter': 'Cutter'}
-sort_dict = {'FiFaX': 'fifax',
-             'MPH': 'mph',
-             'RPM': 'rpm',
-             'VBreak': 'vbreak',
-             'HBreak': 'hbreak'}
+sort_dict = {}
+for key, value in zip(sort_in_list, sort_in):
+  sort_dict[key] = value
 
 
 # In[20]:
@@ -86,6 +87,18 @@ sort = sort_dict[sort_in]
 
 
 # In[25]:
+def kdeplot(graph_sort, graph_sort_in)
+  fig = plt.figure(figsize = (12,4))
+  sns.set_theme('notebook')
+  ax = sns.kdeplot(x = leaderboard[graph_metric])
+  ax.set_xlabel(graph_sort_in)
+  text_y = ax.get_ylim()[1]
+  ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_sort], 0), xytext = (leader[graph_sort], text_y/2),
+                arrowprops = dict(color = 'red'), horizontalalignment = 'center')
+  if pitch_type == '(none)':
+    pitch_type_in = 'all pitche'
+  ax.set(title = f'Distribution of {graph_sort_in} for {pitch_type_in}s on {date}')
+  st.pyplot(fig)
 
 
 if hitter_wins:
@@ -117,30 +130,8 @@ if len(leaderboard) > 0:
         st.write(f"{leader.pitcher}'s {leader['pitch_type_raw'].lower()} to {leader.batter} in inning {str(leader.inning)}, {leader['count'][1]}-{leader['count'][4]} count.")
         st.components.v1.iframe(f"https://www.mlb.com/video/search?q={leader.pitcher.replace(' ', '+')}+{leader.batter.replace(' ', '+')}+inning+{str(leader.inning)}+{str(leader['count'][1])}+ball+{str(leader['count'][4])}+strike&qt=FREETEXT", height = 600)
         
-        fig = plt.figure(figsize = (12,4))
-        sns.set_theme('notebook')
-        graph_metric = 'fifax'
-        ax = sns.kdeplot(x = leaderboard[graph_metric])
-        ax.set_xlabel('FiFaX')
-        text_y = ax.get_ylim()[1]
-        ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_metric], 0), xytext = (leader[graph_metric], text_y/2),
-                    arrowprops = dict(color = 'red'), horizontalalignment = 'center')
-        if pitch_type == '(none)':
-          pitch_type_in = 'all pitche'
-        ax.set(title = f'Distribution of FiFaX for {pitch_type_in}s on {date}')
-        st.pyplot(fig)
-        
-        fig2 = plt.figure(figsize = (12,4))
-        graph_metric = 'mph'
-        ax2 = sns.kdeplot(x = leaderboard[graph_metric])
-        ax2.set_xlabel('MPH')
-        text_y = ax2.get_ylim()[1]
-        ax2.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_metric], 0), xytext = (leader[graph_metric], text_y/2),
-                    arrowprops = dict(color = 'red'), horizontalalignment = 'center')
-        if pitch_type == '(none)':
-          pitch_type_in = 'all pitche'
-        ax2.set(title = f'Distribution of MPH for {pitch_type_in}s on {date}')
-        st.pyplot(fig2)
+    for key in sort_in_list:
+      kdeplot(sort_dict[key], key)
         
     else:
         st.write('Index out of range!')
