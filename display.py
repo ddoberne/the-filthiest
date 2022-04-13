@@ -87,7 +87,7 @@ sort = sort_dict[sort_in]
 
 
 # In[25]:
-def kdeplot(graph_sort, graph_sort_in):
+def kdeplot(graph_sort, graph_sort_in, leader, leaderboard, pitch_type_in):
   fig = plt.figure(figsize = (12,4))
   sns.set_theme('notebook')
   ax = sns.kdeplot(x = leaderboard[graph_sort])
@@ -131,7 +131,7 @@ if len(leaderboard) > 0:
         st.components.v1.iframe(f"https://www.mlb.com/video/search?q={leader.pitcher.replace(' ', '+')}+{leader.batter.replace(' ', '+')}+inning+{str(leader.inning)}+{str(leader['count'][1])}+ball+{str(leader['count'][4])}+strike&qt=FREETEXT", height = 600)
         
     for key in sort_in_list:
-      kdeplot(sort_dict[key], key)
+      kdeplot(sort_dict[key], key, leader, leaderboard, pitch_type_in)
         
     else:
         st.write('Index out of range!')
