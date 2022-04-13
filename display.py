@@ -90,7 +90,7 @@ sort = sort_dict[sort_in]
 def kdeplot(graph_sort, graph_sort_in):
   fig = plt.figure(figsize = (12,4))
   sns.set_theme('notebook')
-  ax = sns.kdeplot(x = leaderboard[graph_metric])
+  ax = sns.kdeplot(x = leaderboard[graph_sort])
   ax.set_xlabel(graph_sort_in)
   text_y = ax.get_ylim()[1]
   ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_sort], 0), xytext = (leader[graph_sort], text_y/2),
