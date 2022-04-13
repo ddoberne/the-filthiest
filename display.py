@@ -130,16 +130,17 @@ if len(leaderboard) > 0:
         ax.set(title = f'Distribution of FiFaX for {pitch_type_in}s on {date}')
         st.pyplot(fig)
         
+        fig2 = plt.figure(figsize = (12,4))
         graph_metric = 'mph'
         ax2 = sns.kdeplot(x = leaderboard[graph_metric])
         ax2.set_xlabel('MPH')
-        text_y = ax.get_ylim()[1]
+        text_y = ax2.get_ylim()[1]
         ax2.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_metric], 0), xytext = (leader[graph_metric], text_y/2),
                     arrowprops = dict(color = 'red'), horizontalalignment = 'center')
         if pitch_type == '(none)':
           pitch_type_in = 'all pitche'
         ax2.set(title = f'Distribution of MPH for {pitch_type_in}s on {date}')
-        st.pyplot(fig)
+        st.pyplot(fig2)
         
     else:
         st.write('Index out of range!')
