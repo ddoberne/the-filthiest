@@ -87,10 +87,10 @@ sort = sort_dict[sort_in]
 
 
 # In[25]:
-def kdeplot(graph_sort, graph_sort_in, leader, leaderboard, pitch_type_in):
+def kdeplot(graph_sort, graph_sort_in, leader, df_all, pitch_type_in):
   fig = plt.figure(figsize = (12,4))
   sns.set_theme('notebook')
-  ax = sns.kdeplot(x = leaderboard[graph_sort])
+  ax = sns.kdeplot(x = df_all[graph_sort])
   ax.set_xlabel(graph_sort_in)
   text_y = ax.get_ylim()[1]
   ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_sort], 0), xytext = (leader[graph_sort], text_y/2),
@@ -135,7 +135,7 @@ if len(leaderboard) > 0:
         st.video(leader.url)
       
       for key in sort_in_list:
-        kdeplot(sort_dict[key], key, leader, leaderboard, pitch_type_in)
+        kdeplot(sort_dict[key], key, leader, df, pitch_type_in)
         
     else:
         st.write('Index out of range!')
