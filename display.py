@@ -129,7 +129,8 @@ if len(leaderboard) > 0:
     
     if leader_index <= show_n:
       st.write(f"{leader.pitcher}'s {leader['pitch_type_raw'].lower()} to {leader.batter} in inning {str(leader.inning)}, {leader['count'][1]}-{leader['count'][4]} count.")
-      if leader.url == 'None':
+      show_search = ('url' not in df.columns)
+      if show_search or leader.url == 'None':
         
         st.components.v1.iframe(f"https://www.mlb.com/video/search?q={leader.pitcher.replace(' ', '+')}+{leader.batter.replace(' ', '+')}+inning+{str(leader.inning)}+{str(leader['count'][1])}+ball+{str(leader['count'][4])}+strike&qt=FREETEXT", height = 600)
       
