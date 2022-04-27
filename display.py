@@ -24,25 +24,25 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
-def get_df_from_date(date):
-  date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
+def get_df_from_date(pick_date):
+  date_str = '-'.join([str(pick_date.year), str(pick_date.month), str(pick_date.day)])
   filename = date_str + '.csv'
   url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
   return pd.read_csv(url, index_col = 0)
 
-date = date.today() + timedelta(days = -1)
+pick_date = date.today() + timedelta(days = -1)
 try:
   
-  df = get_df_from_date(date)
+  df = get_df_from_date(pick_date)
   print('URL get today - 1')
 except:
-  date = date.today() + timedelta(days = -2)
-  df = get_df_from_date(date)
+  pick_date = date.today() + timedelta(days = -2)
+  df = get_df_from_date(pick_date)
   print('URL get today - 2')
   
 opening_day = date(2022, 4, 7)
-date = st.sidebar.date_input(label = 'Pitches from date:', value = date, min_value = opening_day, max_value = date)
-df = get_df_from_date(date)
+pick_date = st.sidebar.date_input(label = 'Pitches from date:', value = pick_date, min_value = opening_day, max_value =pick_date)
+df = get_df_from_date(pick_date)
 
 # In[19]:
 
