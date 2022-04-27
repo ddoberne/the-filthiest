@@ -40,7 +40,8 @@ except:
   df = get_df_from_date(date)
   print('URL get today - 2')
   
-date = st.sidebar.date_input(label = 'Pitches from date:', value = date, min_value = None, max_value = date)
+opening_day = date(2022, 4, 7)
+date = st.sidebar.date_input(label = 'Pitches from date:', value = date, min_value = opening_day, max_value = date)
 df = get_df_from_date(date)
 
 # In[19]:
