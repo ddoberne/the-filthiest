@@ -24,24 +24,24 @@ st.write('# The Filthiest ⚾')
 
 # In[ ]:
 
+def get_df_from_date(date):
+  date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
+  filename = date_str + '.csv'
+  url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
+  return pd.read_csv(url, index_col = 0)
+
 date = date.today() + timedelta(days = -1)
 try:
   
-  date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
-  filename = date_str + '.csv'
-  url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
-  contents = requests.get(url).content
-  df = pd.read_csv(url, index_col = 0)
-  print('URL get try 1')
+  df = get_df_from_date(date)
+  print('URL get today - 1')
 except:
   date = date.today() + timedelta(days = -2)
-  date_str = '-'.join([str(date.year), str(date.month), str(date.day)])
-  filename = date_str + '.csv'
-  url = 'https://storage.googleapis.com/the-filthiest/pitch-data/' + filename
-  contents = requests.get(url).content
-  df = pd.read_csv(url, index_col = 0)
-  print('URL get try 2')
+  df = get_df_from_date(date)
+  print('URL get today - 2')
   
+date = st.sidebar.date_input(label = 'Pitches from date:', value = date, min_value = date(2022, 4, 7), max_value = date)
+df = get_df_from_date(date)
 
 # In[19]:
 
@@ -127,8 +127,9 @@ if len(leaderboard) > 0:
     st.dataframe(leaderboard_show.head(show_n).style.format({'Velo (mph)':"{:.4}", 'FiFaX':"{:.3}"}))
     
     if leader_index <= show_n:
+      st.write(f"{leader.pitcher}'s {leader['pitch_type_raw'].lower()} to {leader.batter} in inning {str(leader.inning)}, {leader['count'][1]}-{leader['count'][4]} count.")
       if leader.url == 'None':
-        st.write(f"{leader.pitcher}'s {leader['pitch_type_raw'].lower()} to {leader.batter} in inning {str(leader.inning)}, {leader['count'][1]}-{leader['count'][4]} count.")
+        
         st.components.v1.iframe(f"https://www.mlb.com/video/search?q={leader.pitcher.replace(' ', '+')}+{leader.batter.replace(' ', '+')}+inning+{str(leader.inning)}+{str(leader['count'][1])}+ball+{str(leader['count'][4])}+strike&qt=FREETEXT", height = 600)
       
       else:
