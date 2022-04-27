@@ -122,7 +122,7 @@ if len(leaderboard) > 0:
     leaderboard_show.columns = ['Pitcher', 'Batter', 'Velo (mph)', 'RPM', 'VBreak', 'HBreak', 'FiFaX']
     leaderboard_show.index = range(1, len(leaderboard_show) + 1)
     if pitch_type == '(none)':
-      st.write(f'The top {str(show_n)} pitches from MLB games on {date}, sorted by {sort_in}.')
+      st.write(f'The top {str(show_n)} pitches from MLB games on {pick_date}, sorted by {sort_in}.')
     else:
       st.write(f'The top {str(show_n)} {pitch_type_in}s from MLB games on {date}, sorted by {sort_in}.')
     st.dataframe(leaderboard_show.head(show_n).style.format({'Velo (mph)':"{:.4}", 'FiFaX':"{:.3}"}))
