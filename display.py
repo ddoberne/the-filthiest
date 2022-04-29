@@ -98,7 +98,7 @@ def kdeplot(graph_sort, graph_sort_in, leader, df_all, pitch_type_in):
                 arrowprops = dict(color = 'red'), horizontalalignment = 'center')
   if pitch_type == '(none)':
     pitch_type_in = 'all pitche'
-  ax.set(title = f'Distribution of {graph_sort_in} for {pitch_type_in}s on {date}')
+  ax.set(title = f'Distribution of {graph_sort_in} for {pitch_type_in}s on {pick_date}')
   st.pyplot(fig)
 
 
