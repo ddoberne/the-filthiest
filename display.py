@@ -92,7 +92,7 @@ def kdeplot(graph_sort, graph_sort_in, leader, df_all, pitch_type_in):
   fig = plt.figure(figsize = (12,4))
   sns.set_theme('notebook')
   if pitch_type == '(none)':
-    pass
+    df_filter = df_all
   else:
     df_filter = df_all.loc[df_all['pitch_type'] == pitch_type_in]
   ax = sns.kdeplot(x = df_filter[graph_sort])
