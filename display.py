@@ -91,7 +91,11 @@ sort = sort_dict[sort_in]
 def kdeplot(graph_sort, graph_sort_in, leader, df_all, pitch_type_in):
   fig = plt.figure(figsize = (12,4))
   sns.set_theme('notebook')
-  ax = sns.kdeplot(x = df_all[graph_sort])
+  if pitch_type == '(none)':
+    pass
+  else:
+    df_filter = df_all.loc[df_all['pitch_type'] == pitch_type_in]
+  ax = sns.kdeplot(x = df_filter[graph_sort])
   ax.set_xlabel(graph_sort_in)
   text_y = ax.get_ylim()[1]
   ax.annotate(f"{leader.pitcher}'s {leader.pitch_type_raw}", xy = (leader[graph_sort], 0), xytext = (leader[graph_sort], text_y/2),
