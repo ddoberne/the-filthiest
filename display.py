@@ -136,8 +136,6 @@ if len(leaderboard) > 0:
     for key in sort_in_list:
       kdeplot(sort_dict[key], key, leader, df, pitch_type, pitch_type_in)
         
-  else:
-    st.write('Index out of range!')
 else:
   st.write('Player not found!')
 
