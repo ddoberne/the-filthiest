@@ -120,9 +120,6 @@ if pitcher_search != '':
 if len(leaderboard) > 0:
     show_n = min(len(leaderboard), 5)
     
-    leader_index = st.selectbox('Select row for video:', (1,2,3,4,5))
-    if leader_index <= show_n:
-        leader = leaderboard.iloc[leader_index - 1]
     leaderboard_show = leaderboard[['pitcher', 'batter', 'mph', 'rpm', 'vbreak', 'hbreak', 'fifax']]
     leaderboard_show.columns = ['Pitcher', 'Batter', 'Velo (mph)', 'RPM', 'VBreak', 'HBreak', 'FiFaX']
     leaderboard_show.index = range(1, len(leaderboard_show) + 1)
@@ -132,6 +129,9 @@ if len(leaderboard) > 0:
       st.write(f'The top {str(show_n)} {pitch_type_in}s from MLB games on {pick_date}, sorted by {sort_in}.')
     st.dataframe(leaderboard_show.head(show_n).style.format({'Velo (mph)':"{:.4}", 'FiFaX':"{:.3}"}))
     
+    leader_index = st.selectbox('Select row to watch video:', (1,2,3,4,5))
+    if leader_index <= show_n:
+        leader = leaderboard.iloc[leader_index - 1]
     if leader_index <= show_n:
       st.write(f"{leader.pitcher}'s {leader['pitch_type_raw'].lower()} to {leader.batter} in inning {str(leader.inning)}, {leader['count'][1]}-{leader['count'][4]} count.")
       show_search = ('url' not in df.columns)
