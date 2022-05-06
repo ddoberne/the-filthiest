@@ -54,7 +54,6 @@ sort_list = ('fifax', 'mph', 'rpm', 'vbreak', 'hbreak')
 
 sort_in = st.sidebar.selectbox('Sort by:', sort_in_list)
 
-leader_index = st.sidebar.selectbox('Select index:', (1,2,3,4,5))
 pitcher_search = st.sidebar.text_input('Pitcher search:', value = '')
 hitter_wins = st.sidebar.checkbox('Show hitter victories instead')
 
@@ -120,6 +119,8 @@ if pitcher_search != '':
     leaderboard = leaderboard.loc[leaderboard['pitcher'].apply(lambda pitcher_name: pitcher_search.lower() in pitcher_name.lower())]
 if len(leaderboard) > 0:
     show_n = min(len(leaderboard), 5)
+    
+    leader_index = st.selectbox('Select row for video:', (1,2,3,4,5))
     if leader_index <= show_n:
         leader = leaderboard.iloc[leader_index - 1]
     leaderboard_show = leaderboard[['pitcher', 'batter', 'mph', 'rpm', 'vbreak', 'hbreak', 'fifax']]
