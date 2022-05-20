@@ -64,7 +64,7 @@ pitch_type_list = ('(none)', '4-Seam Fastball', 'Slider', '2-Seam Fastball/Sinke
 pitch_type_in = st.sidebar.selectbox('Pitch type:', pitch_type_list)
 sort_in = st.sidebar.selectbox('Sort by:', sort_in_list)
 pitcher_search = st.sidebar.text_input('Pitcher search:', value = '')
-hitter_wins = st.sidebar.checkbox('Show hitter victories instead')
+hitter_wins = st.sidebar.checkbox('Show hitter victories instead (#HittingSamurai)')
 
 st.sidebar.write('**The Filthiest** reads in Statcast data from Baseball Savant and calculates the filthiest pitches thrown each day.')
 st.sidebar.write("**FiFaX**, or **Filth Factor eXpected**, is the probability a pitch will be a swinging strike, called strike, or foul tip, given that the pitch is a strike or put in play.")
