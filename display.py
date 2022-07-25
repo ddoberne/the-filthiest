@@ -90,7 +90,10 @@ pitch_type = pitch_dict[pitch_type_in]
 sort = sort_dict[sort_in]
 
 if hitter_wins:
+  if 'result_raw' in df.columns:
     df = df.loc[(df['result_raw'] == 'In play, no out') | (df['result_raw'] == 'In play, run(s)')]
+  else:
+    df = df.loc[(df['result'] == 'Contact') & (df['batter_wins'] == True)]
 else:
     df = df.loc[df['result'] == 'Strike']
 
