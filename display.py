@@ -53,7 +53,8 @@ except:
 opening_day = date(2022, 4, 7)
 pick_date = st.sidebar.date_input(label = 'Pitches from date:', value = pick_date, min_value = opening_day, max_value =pick_date)
 df = get_df_from_date(pick_date)
-
+df['vbreak'] = df['vbreak'].apply(round)
+df['hbreak'] = df['hbreak'].apply(round)
 
 
 sort_in_list = ('FiFaX', 'MPH', 'RPM', 'VBreak', 'HBreak')
