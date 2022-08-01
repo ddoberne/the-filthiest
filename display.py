@@ -132,6 +132,7 @@ if len(leaderboard) > 0:
     show_search = ('url' not in df.columns)
     if show_search or leader.url == 'None':
       if 'bsquery' in df.columns:
+        st.write('(Click the result row, then the video camera icon on the dropdown to watch highlight)')
         st.components.v1.iframe(leader.bsquery, height = 600)
       else:
         st.components.v1.iframe(f"https://www.mlb.com/video/search?q={leader.pitcher.replace(' ', '+')}+{leader.batter.replace(' ', '+')}+inning+{str(leader.inning)}+{str(leader['count'][1])}+ball+{str(leader['count'][4])}+strike&qt=FREETEXT", height = 600)
