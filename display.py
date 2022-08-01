@@ -131,7 +131,7 @@ if len(leaderboard) > 0:
     # If url for video is not in .csv, use iframe to search it on mlb
     show_search = ('url' not in df.columns)
     if show_search or leader.url == 'None':
-      if True: #'bsquery' in leader.columns:
+      if 'bsquery' in df.columns:
         st.components.v1.iframe(leader.bsquery, height = 600)
       else:
         st.components.v1.iframe(f"https://www.mlb.com/video/search?q={leader.pitcher.replace(' ', '+')}+{leader.batter.replace(' ', '+')}+inning+{str(leader.inning)}+{str(leader['count'][1])}+ball+{str(leader['count'][4])}+strike&qt=FREETEXT", height = 600)
