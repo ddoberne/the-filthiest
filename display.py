@@ -43,14 +43,12 @@ st.write('# The Filthiest ⚾')
   
 # Defaults to yesterday, but displays previous day if no game data
 pick_date = date.today() + timedelta(days = -1)
-try:
-  df = get_df_from_date(pick_date)
-except:
-  pick_date = date.today() + timedelta(days = -2)
+while True:
   try:
     df = get_df_from_date(pick_date)
+    break
   except:
-    pick_date = date(2022, 7, 1)
+    pick_date = pick_date + timedelta(days = -1)
 
 # Allows user to pick a date between opening day and yesterday
 opening_day = date(2022, 4, 7)
