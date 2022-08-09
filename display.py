@@ -47,7 +47,10 @@ try:
   df = get_df_from_date(pick_date)
 except:
   pick_date = date.today() + timedelta(days = -2)
-  df = get_df_from_date(pick_date)
+  try:
+    df = get_df_from_date(pick_date)
+  except:
+    pick_date = date(2022, 7, 1)
 
 # Allows user to pick a date between opening day and yesterday
 opening_day = date(2022, 4, 7)
